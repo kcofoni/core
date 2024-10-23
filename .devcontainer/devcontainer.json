@@ -61,5 +61,13 @@
         }
       }
     }
-  }
+  },
+  "mounts": [
+    // Custom configuration directory
+    "source=${localEnv:HOME}/dev/ha-config,target=${containerWorkspaceFolder}/config,type=bind",
+    // Custom component
+    "source=${localEnv:HOME}/dev/ha-netro-watering/custom_components/netro_watering,target=${containerWorkspaceFolder}/config/custom_components/netro_watering,type=bind"
+    //Custom library
+    //"source=${localEnv:HOME}/path/to/custom_repo/custom_libraries/library_name,target=${containerWorkspaceFolder}/config/custom_libraries/library_name,type=bind",
+  ]
 }

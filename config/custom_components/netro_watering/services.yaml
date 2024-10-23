@@ -1,0 +1,156 @@
+refresh_data:
+  fields:
+    config_entry_id:
+      required: true
+      selector:
+        config_entry:
+          integration: netro_watering
+report_weather:
+  fields:
+    config_entry_id:
+      required: true
+      selector:
+        config_entry:
+          integration: netro_watering
+    date:
+      required: true
+      selector:
+        date:
+    condition:
+      required: false
+      selector:
+        select:
+          options:
+            - clear
+            - cloudy
+            - rain
+            - snow
+            - wind
+    rain:
+      required: false
+      selector:
+        number:
+          min: 0
+          max: 500
+          step: 0.01
+          mode: box
+          unit_of_measurement: "mm"
+    rain_prob:
+      required: false
+      selector:
+        number:
+          min: 0
+          max: 100
+          unit_of_measurement: "%"
+    temp:
+      required: false
+      selector:
+        number:
+          min: 0
+          max: 60
+          step: 0.1
+          unit_of_measurement: "°C"
+    t_min:
+      required: false
+      selector:
+        number:
+          min: 0
+          max: 60
+          step: 0.1
+          unit_of_measurement: "°C"
+    t_max:
+      required: false
+      selector:
+        number:
+          min: 0
+          max: 60
+          step: 0.1
+          unit_of_measurement: "°C"
+    t_dew:
+      required: false
+      selector:
+        number:
+          min: 0
+          max: 60
+          step: 0.1
+          unit_of_measurement: "°C"
+    wind_speed:
+      required: false
+      selector:
+        number:
+          min: 0
+          max: 60
+          step: 0.01
+          unit_of_measurement: "m/s"
+    humidity:
+      required: false
+      selector:
+        number:
+          min: 0
+          max: 100
+          unit_of_measurement: "%"
+    pressure:
+      required: false
+      selector:
+        number:
+          min: 850
+          max: 1100
+          step: 0.1
+          unit_of_measurement: "hpa"
+          mode: box
+set_moisture:
+  fields:
+    zone_id:
+      required: true
+      selector:
+        device:
+          integration: netro_watering
+          filter:
+            model: Virtual zone
+    moisture:
+      required: true
+      selector:
+        number:
+          min: 0
+          max: 100
+          unit_of_measurement: "%"
+start_watering:
+  target:
+    entity:
+      integration: netro_watering
+      domain: switch
+  fields:
+    duration:
+      required: true
+      default: 30
+      selector:
+        number:
+          min: 1
+          max: 90
+          unit_of_measurement: "minutes"
+    delay:
+      required: false
+      selector:
+        number:
+          min: 0
+          max: 90
+          unit_of_measurement: "minutes"
+    start_time:
+      required: false
+      selector:
+        datetime:
+stop_watering:
+  target:
+    entity:
+      integration: netro_watering
+      domain: switch
+enable:
+  target:
+    entity:
+      integration: netro_watering
+      domain: switch
+disable:
+  target:
+    entity:
+      integration: netro_watering
+      domain: switch
